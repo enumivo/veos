@@ -35,7 +35,7 @@ void veos::apply(account_name contract, action_name act) {
 
   if (contract == N(veos.coin) && act == N(transfer)) {
     auto transfer = unpack_action_data<currency::transfer>();
-    enumivo_assert(transfer.quantity.symbol == USD_SYMBOL, "Must send VEOS");
+    enumivo_assert(transfer.quantity.symbol == VEOS_SYMBOL, "Must send VEOS");
     got_veos(transfer);
     return;
   }
