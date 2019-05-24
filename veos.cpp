@@ -32,7 +32,7 @@ void veos::apply(account_name contract, action_name act) {
     
     auto transfer = unpack_action_data<currency::transfer>();
     
-    if (contract == N(enu.token) {
+    if contract == N(enu.token) {
       if (transfer.memo == "ELN") 
         got_enu_send_eln(transfer)
       else if (transfer.memo == "VEOS") 
