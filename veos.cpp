@@ -32,14 +32,14 @@ void veos::apply(account_name contract, action_name act) {
     
     auto transfer = unpack_action_data<currency::transfer>();
     
-    if contract == N(enu.token) {
+    if (contract == N(enu.token)) {
       if (transfer.memo == "ELN") 
         got_enu_send_eln(transfer)
       else if (transfer.memo == "VEOS") 
         got_enu_send_veos(transfer)
       else 
         enumivo_assert(false, "Memo must be ELN or VEOS");
-    } else if (contract == N(eln.coin) {
+    } else if (contract == N(eln.coin)) {
       if (transfer.memo == "ENU") 
         got_eln_send_enu(transfer)
       else if (transfer.memo == "VEOS") 
@@ -47,7 +47,7 @@ void veos::apply(account_name contract, action_name act) {
       else 
         enumivo_assert(false, "Memo must be ENU or VEOS");
 
-    } else if (contract == N(veos.coin) {
+    } else if (contract == N(veos.coin)) {
       if (transfer.memo == "ENU") 
         got_veos_send_enu(transfer)
       else if (transfer.memo == "ELN") 
