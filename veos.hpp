@@ -12,12 +12,12 @@ class veos : public contract {
 public:
   veos(account_name self): contract(self) {}
 
-  void veos::got_enu_send_eln(const currency::transfer &transfer);
-  void veos::got_enu_send_veos(const currency::transfer &transfer);
-  void veos::got_eln_send_enu(const currency::transfer &transfer);
-  void veos::got_eln_send_veos(const currency::transfer &transfer);
-  void veos::got_veos_send_enu(const currency::transfer &transfer);
-  void veos::got_veos_send_eln(const currency::transfer &transfer);
+  void got_enu_send_eln(const currency::transfer &transfer);
+  void got_enu_send_veos(const currency::transfer &transfer);
+  void got_eln_send_enu(const currency::transfer &transfer);
+  void got_eln_send_veos(const currency::transfer &transfer);
+  void got_veos_send_enu(const currency::transfer &transfer);
+  void got_veos_send_eln(const currency::transfer &transfer);
 
   void apply(account_name contract, action_name act);
 };
