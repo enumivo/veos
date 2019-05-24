@@ -14,7 +14,7 @@ void veos::got_enu_send_eln(const currency::transfer &transfer) {
   auto quantity = asset(amount, ELN_SYMBOL);
   action(
     permission_level{_self, N(active)}, 
-    N(enu.token), 
+    N(eln.coin), 
     N(transfer),
     std::make_tuple(_self, to, quantity, std::string("ELN sent"))).send();
 }
