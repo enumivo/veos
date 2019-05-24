@@ -10,13 +10,30 @@ using namespace std;
 
 void veos::got_enu_send_eln(const currency::transfer &transfer) {
   auto to = transfer.from;
-  double amount = 10000*0.0001;
-  auto quantity = asset(amount, ELN_SYMBOL);
+
+  // get ENU balance
+  double enu_balance = enumivo::token(N(enu.token)).
+	   get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
+  
+  enu_balance = enu_balance/10000;
+
+  // get ELN balance
+  double eln_balance = enumivo::token(N(eln.coin)).
+	   get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
+
+  eln_balance = eln_balance/10000;
+
+  double product = eln_balance * enu_balance;
+  double amount = eln_balance - (product / (received + enu_balance));
+
+  auto to = transfer.from;
+  auto quantity = asset(10000*amount, ELN_SYMBOL);
+
   action(
     permission_level{_self, N(active)}, 
     N(eln.coin), 
     N(transfer),
-    std::make_tuple(_self, to, quantity, std::string("ELN sent"))).send();
+    std::make_tuple(_self, to, quantity, std::string("veos.mm received ENU, sent ELN"))).send();
 }
 
 void veos::got_enu_send_veos(const currency::transfer &transfer) {
