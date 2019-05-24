@@ -9,7 +9,11 @@ using namespace enumivo;
 using namespace std;
 
 void veos::got_enu_send_eln(const currency::transfer &transfer) {
+
   auto to = transfer.from;
+
+  double received = transfer.quantity.amount;
+  received = received/10000;
 
   // get ENU balance
   double enu_balance = enumivo::token(N(enu.token)).
@@ -26,7 +30,6 @@ void veos::got_enu_send_eln(const currency::transfer &transfer) {
   double product = eln_balance * enu_balance;
   double amount = eln_balance - (product / (received + enu_balance));
 
-  auto to = transfer.from;
   auto quantity = asset(10000*amount, ELN_SYMBOL);
 
   action(
