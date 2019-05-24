@@ -36,7 +36,7 @@ void veos::got_enu_send_eln(const currency::transfer &transfer) {
     permission_level{_self, N(active)}, 
     N(eln.coin), 
     N(transfer),
-    std::make_tuple(_self, to, quantity, "Received "+std::to_string(received)+std::string(" ENU, sent ELN"))).send();
+    std::make_tuple(_self, to, quantity, std::string("Received ENU, sent ELN"))).send();
 }
 
 void veos::got_enu_send_veos(const currency::transfer &transfer) {
@@ -69,7 +69,7 @@ void veos::got_eln_send_enu(const currency::transfer &transfer) {
     permission_level{_self, N(active)}, 
     N(enu.token), 
     N(transfer),
-    std::make_tuple(_self, to, quantity, std::string("veos.mm received ELN, sent ENU"))).send();
+    std::make_tuple(_self, to, quantity, std::string("Received ELN, sent ENU"))).send();
 }
 
 void veos::got_eln_send_veos(const currency::transfer &transfer) {
