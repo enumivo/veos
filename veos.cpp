@@ -8,45 +8,55 @@
 using namespace enumivo;
 using namespace std;
 
-void veos::got_enu(const currency::transfer &transfer) {
+void veos::got_enu_send_eln(const currency::transfer &transfer) {
 }
 
-void veos::got_eln(const currency::transfer &transfer) {
+void veos::got_enu_send_veos(const currency::transfer &transfer) {
 }
 
-void veos::got_veos(const currency::transfer &transfer) {
+void veos::got_eln_send_enu(const currency::transfer &transfer) {
+}
+
+void veos::got_eln_send_veos(const currency::transfer &transfer) {
+}
+
+void veos::got_veos_send_enu(const currency::transfer &transfer) {
+}
+
+void veos::got_veos_send_eln(const currency::transfer &transfer) {
 }
 
 void veos::apply(account_name contract, action_name act) {
 
-  if (contract == N(enu.token) && act == N(transfer)) {
-    auto transfer = unpack_action_data<currency::transfer>();
-    enumivo_assert(transfer.quantity.symbol == ENU_SYMBOL, "Must send ENU");
-    got_enu(transfer);
-    return;
-  }
-
-  if (contract == N(eln.coin) && act == N(transfer)) {
-    auto transfer = unpack_action_data<currency::transfer>();
-    enumivo_assert(transfer.quantity.symbol == ELN_SYMBOL, "Must send ELN");
-    got_eln(transfer);
-    return;
-  }
-
-  if (contract == N(veos.coin) && act == N(transfer)) {
-    auto transfer = unpack_action_data<currency::transfer>();
-    enumivo_assert(transfer.quantity.symbol == VEOS_SYMBOL, "Must send VEOS");
-    got_veos(transfer);
-    return;
-  }
-
   if (act == N(transfer)) {
+    
     auto transfer = unpack_action_data<currency::transfer>();
-    enumivo_assert(false, "Must send ENU, ELN, or VEOS");
-    return;
-  }
+    
+    if (contract == N(enu.token) {
+      if (transfer.memo == "ELN") 
+        got_enu_send_eln(transfer)
+      else if (transfer.memo == "VEOS") 
+        got_enu_send_veos(transfer)
+      else 
+        enumivo_assert(false, "Memo must be ELN or VEOS");
+    } else if (contract == N(eln.coin) {
+      if (transfer.memo == "ENU") 
+        got_eln_send_enu(transfer)
+      else if (transfer.memo == "VEOS") 
+        got_eln_send_veos(transfer)
+      else 
+        enumivo_assert(false, "Memo must be ENU or VEOS");
 
-  if (contract != _self) return;
+    } else if (contract == N(veos.coin) {
+      if (transfer.memo == "ENU") 
+        got_veos_send_enu(transfer)
+      else if (transfer.memo == "ELN") 
+        got_veos_send_eln(transfer)
+      else 
+        enumivo_assert(false, "Memo must be ENU or ELN");
+    } else
+      enumivo_assert(false, "Must send ENU or ELN or VEOS");
+  } 
 }
 
 extern "C" {
