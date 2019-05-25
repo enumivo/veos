@@ -27,7 +27,7 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = veos_supply*(pow(1+(received/enu_balance),0.80)-1);
+  double amount = veos_supply*(pow(1+(received/enu_balance),0.50)-1);
 
   auto quantity = asset(10000*amount, VEOS_SYMBOL);
 
@@ -57,7 +57,7 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = veos_supply*(pow(1+(received/eln_balance),0.80)-1);
+  double amount = veos_supply*(pow(1+(received/eln_balance),0.50)-1);
 
   auto quantity = asset(10000*amount, VEOS_SYMBOL);
 
@@ -86,7 +86,7 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = enu_balance*(1-(pow(1-(received/veos_supply),(1/0.80))));
+  double amount = enu_balance*(1-(pow(1-(received/veos_supply),(1/0.50))));
 
   auto quantity = asset(10000*amount, ENU_SYMBOL);
 
@@ -124,7 +124,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = eln_balance*(1-(pow(1-(received/veos_supply),(1/0.80))));
+  double amount = eln_balance*(1-(pow(1-(received/veos_supply),(1/0.50))));
 
   auto quantity = asset(10000*amount, ELN_SYMBOL);
 
