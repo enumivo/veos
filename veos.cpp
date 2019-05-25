@@ -49,7 +49,6 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
   
   eln_balance = eln_balance/10000;
-  eln_balance = eln_balance - received;
 
   // get VEOS supply
   double veos_supply = enumivo::token(N(veos.coin)).
@@ -107,6 +106,7 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
 }
 
 void veos::got_veos_send_eln(const currency::transfer &transfer) {
+<<<<<<< HEAD
   auto to = transfer.from;
 
   double received = transfer.quantity.amount;
@@ -142,6 +142,8 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
     N(veos.coin), 
     N(retire),
     std::make_tuple(retire, std::string("Retired VEOS"))).send();
+=======
+>>>>>>> parent of 2a40748... Update veos.cpp
 }
 
 void veos::apply(account_name contract, action_name act) {
