@@ -20,6 +20,7 @@ void veos::got_enu_send_eln(const currency::transfer &transfer) {
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
   
   enu_balance = enu_balance/10000;
+  enu_balance = enu_balance-received;  
 
   // get ELN balance
   double eln_balance = enumivo::token(N(eln.coin)).
@@ -58,7 +59,7 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = veos_supply*(pow(1+(received/enu_balance),0.95)-1);
+  double amount = veos_supply*(pow(1+(received/enu_balance),0.50)-1);
 
   auto quantity = asset(10000*amount, VEOS_SYMBOL);
 
@@ -80,6 +81,7 @@ void veos::got_eln_send_enu(const currency::transfer &transfer) {
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
   
   eln_balance = eln_balance/10000;
+  eln_balance = eln_balance-received;  
 
   // get ENU balance
   double enu_balance = enumivo::token(N(enu.token)).
@@ -118,7 +120,7 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = veos_supply*(pow(1+(received/eln_balance),0.95)-1);
+  double amount = veos_supply*(pow(1+(received/eln_balance),0.50)-1);
 
   auto quantity = asset(10000*amount, VEOS_SYMBOL);
 
@@ -147,7 +149,7 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = enu_balance*(1-(pow(1-(received/veos_supply),(1/0.95))));
+  double amount = enu_balance*(1-(pow(1-(received/veos_supply),(1/0.50))));
 
   auto quantity = asset(10000*amount, ENU_SYMBOL);
 
@@ -185,7 +187,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = eln_balance*(1-(pow(1-(received/veos_supply),(1/0.95))));
+  double amount = eln_balance*(1-(pow(1-(received/veos_supply),(1/0.50))));
 
   auto quantity = asset(10000*amount, ELN_SYMBOL);
 
