@@ -54,7 +54,7 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
   enu_balance = enu_balance - received;
 
   // get VEOS supply
-  double veos_supply = enumivo::token(N(veos.coin)).
+  double veos_supply = enumivo::token(N(stable.coin)).
 	   get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
 
   veos_supply = veos_supply/10000;
@@ -65,7 +65,7 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
 
   action(
     permission_level{_self, N(active)}, 
-    N(veos.coin), 
+    N(stable.coin), 
     N(issue),
     std::make_tuple(to, quantity, std::string("Received ENU, issued VEOS"))).send();
 }
@@ -115,7 +115,7 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
   eln_balance = eln_balance - received;
 
   // get VEOS supply
-  double veos_supply = enumivo::token(N(veos.coin)).
+  double veos_supply = enumivo::token(N(stable.coin)).
 	   get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
 
   veos_supply = veos_supply/10000;
@@ -126,7 +126,7 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
 
   action(
     permission_level{_self, N(active)}, 
-    N(veos.coin), 
+    N(stable.coin), 
     N(issue),
     std::make_tuple(to, quantity, std::string("Received ELN, issued VEOS"))).send();
 }
@@ -144,7 +144,7 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
   enu_balance = enu_balance/10000;
 
   // get VEOS supply
-  double veos_supply = enumivo::token(N(veos.coin)).
+  double veos_supply = enumivo::token(N(stable.coin)).
 	   get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
 
   veos_supply = veos_supply/10000;
@@ -164,7 +164,7 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
 
   action(
     permission_level{_self, N(active)}, 
-    N(veos.coin), 
+    N(stable.coin), 
     N(retire),
     std::make_tuple(retire, std::string("Retired VEOS"))).send();
 }
@@ -182,7 +182,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
   eln_balance = eln_balance/10000;
 
   // get VEOS supply
-  double veos_supply = enumivo::token(N(veos.coin)).
+  double veos_supply = enumivo::token(N(stable.coin)).
 	   get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
 
   veos_supply = veos_supply/10000;
@@ -202,7 +202,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
 
   action(
     permission_level{_self, N(active)}, 
-    N(veos.coin), 
+    N(stable.coin), 
     N(retire),
     std::make_tuple(retire, std::string("Retired VEOS"))).send();
 }
@@ -231,7 +231,7 @@ void veos::apply(account_name contract, action_name act) {
       else 
         enumivo_assert(false, "Memo must be ENU or VEOS");
 
-    } else if (contract == N(veos.coin)) {
+    } else if (contract == N(stable.coin)) {
       if (transfer.memo == "ENU") 
         got_veos_send_enu(transfer);
       else if (transfer.memo == "ELN") 
