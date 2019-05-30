@@ -132,9 +132,17 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = veos_supply*(pow(1+(received/eln_balance),0.50)-1);
 
-  auto quantity = asset(10000*amount, VEOS_SYMBOL);
+  double a = enu_balance;
+  double b = 2 * enu_balance * eln_balance;
+  double c = - enu_balance * eln_balance * received;
+
+  double ue = (sqrt((b*b)-(4*a*c)) - b)/(2*a);
+  double uu = received - ue;
+
+  double new_veos = veos_supply * (uu/(ue+eln_balance));
+
+  auto quantity = asset(10000*new_veos, TEOS_SYMBOL);
 
   action(
     permission_level{_self, N(active)}, 
