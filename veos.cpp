@@ -200,13 +200,11 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
     std::make_tuple(_self, to, quantity, std::string("Received VEOS, sent ENU")))
     .send();
 
-  auto retire = asset(10000*received, VEOS_SYMBOL);
-
   action(
     permission_level{_self, N(active)}, 
     N(stable.coin), 
     N(retire),
-    std::make_tuple(retire, std::string("Retired VEOS"))).send();
+    std::make_tuple(transfer.quantity, std::string("Retired VEOS"))).send();
 }
 
 void veos::got_veos_send_eln(const currency::transfer &transfer) {
@@ -251,8 +249,6 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
     N(transfer),
     std::make_tuple(_self, to, quantity, std::string("Received VEOS, sent ELN")))
     .send();
-
-  auto retire = asset(10000*received, VEOS_SYMBOL);
 
   action(
     permission_level{_self, N(active)}, 
