@@ -138,7 +138,6 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-
   double a = enu_balance;
   double b = 2 * enu_balance * eln_balance;
   double c = - enu_balance * eln_balance * received;
