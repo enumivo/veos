@@ -54,7 +54,7 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
   enu_balance = enu_balance - received;
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(iou.coin)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
 
   eln_balance = eln_balance/10000;
