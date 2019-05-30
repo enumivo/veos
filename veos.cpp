@@ -53,15 +53,27 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
   enu_balance = enu_balance/10000;
   enu_balance = enu_balance - received;
 
+  // get ELN balance
+  double eln_balance = enumivo::token(N(iou.coin)).
+	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
+
+  eln_balance = eln_balance/10000;
+
   // get VEOS supply
   double veos_supply = enumivo::token(N(stable.coin)).
-	   get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
+	  get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
 
   veos_supply = veos_supply/10000;
 
-  double amount = veos_supply*(pow(1+(received/enu_balance),0.50)-1);
+  double a = eln_balance;
+  double b = 2 * eln_balance * enu_balance;
+  double c = - eln_balance * enu_balance * received;
 
-  auto quantity = asset(10000*amount, VEOS_SYMBOL);
+  double eu = (sqrt((b*b)-(4*a*c)) - b)/(2*a);
+  double ee = received - eu;
+
+  double new_veos = veos_supply * (ee/(eu+enu_balance));
+  auto quantity = asset(10000*new_veos, VEOS_SYMBOL);
 
   action(
     permission_level{_self, N(active)}, 
