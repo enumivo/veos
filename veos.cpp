@@ -235,9 +235,10 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
   double enu_portion = enu_balance * (received / veos_supply);
 
   double new_eln_balance = eln_balance - eln_portion;
+  double new_enu_balance = enu_balance - enu_portion;
 
-  double product = new_eln_balance * enu_balance;
-  double eln_bought = new_eln_balance - (product / (enu_portion + enu_balance));
+  double product = new_eln_balance * new_enu_balance;
+  double eln_bought = new_eln_balance - (product / (enu_portion + new_enu_balance));
 
   double amount = eln_portion + eln_bought;
 
