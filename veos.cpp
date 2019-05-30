@@ -227,7 +227,21 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
 
   veos_supply = veos_supply/10000;
 
-  double amount = eln_balance*(1-(pow(1-(received/veos_supply),(1/0.50))));
+  // get ENU balance
+  double enu_balance = enumivo::token(N(enu.token)).
+	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
+  
+  enu_balance = enu_balance/10000;
+
+  double eln_portion = eln_balance * (received / veos_supply);
+  double enu_portion = enu_balance * (received / veos_supply);
+
+  double new_eln_balance = eln_balance - eln_portion;
+
+  double product = new_eln_balance * enu_balance;
+  double eln_bought = new_eln_balance - (product / (enu_portion + enu_balance));
+
+  double amount = eln_portion + eln_bought;
 
   auto quantity = asset(10000*amount, ELN_SYMBOL);
 
