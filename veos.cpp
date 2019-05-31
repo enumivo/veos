@@ -16,14 +16,14 @@ void veos::got_enu_send_eln(const currency::transfer &transfer) {
   received = received/10000;
 
   // get ENU balance
-  double enu_balance = enumivo::token(N(veos.mm)).
+  double enu_balance = enumivo::token(N(enu.token)).
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
   
   enu_balance = enu_balance/10000;
   enu_balance = enu_balance-received;  
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(veos.mm)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
 
   eln_balance = eln_balance/10000;
@@ -47,14 +47,14 @@ void veos::got_enu_send_veos(const currency::transfer &transfer) {
   received = received/10000;
 
   // get ENU balance
-  double enu_balance = enumivo::token(N(veos.mm)).
+  double enu_balance = enumivo::token(N(enu.token)).
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
   
   enu_balance = enu_balance/10000;
   enu_balance = enu_balance - received;
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(veos.mm)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
 
   eln_balance = eln_balance/10000;
@@ -89,14 +89,14 @@ void veos::got_eln_send_enu(const currency::transfer &transfer) {
   received = received/10000;
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(veos.mm)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
   
   eln_balance = eln_balance/10000;
   eln_balance = eln_balance-received;  
 
   // get ENU balance
-  double enu_balance = enumivo::token(N(veos.mm)).
+  double enu_balance = enumivo::token(N(enu.token)).
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
 
   enu_balance = enu_balance/10000;
@@ -120,14 +120,14 @@ void veos::got_eln_send_veos(const currency::transfer &transfer) {
   received = received/10000;
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(veos.mm)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
   
   eln_balance = eln_balance/10000;
   eln_balance = eln_balance - received;
 
   // get ENU balance
-  double enu_balance = enumivo::token(N(veos.mm)).
+  double enu_balance = enumivo::token(N(enu.token)).
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
   
   enu_balance = enu_balance/10000;
@@ -163,13 +163,13 @@ void veos::got_veos_send_enu(const currency::transfer &transfer) {
   received = received/10000;
 
   // get ENU balance
-  double enu_balance = enumivo::token(N(veos.mm)).
+  double enu_balance = enumivo::token(N(enu.token)).
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
   
   enu_balance = enu_balance/10000;
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(veos.mm)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
   
   eln_balance = eln_balance/10000;
@@ -214,7 +214,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
   received = received/10000;
 
   // get ELN balance
-  double eln_balance = enumivo::token(N(veos.mm)).
+  double eln_balance = enumivo::token(N(eln.coin)).
 	  get_balance(_self, enumivo::symbol_type(ELN_SYMBOL).name()).amount;
   
   eln_balance = eln_balance/10000;
@@ -226,7 +226,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
   veos_supply = veos_supply/10000;
 
   // get ENU balance
-  double enu_balance = enumivo::token(N(token.mm)).
+  double enu_balance = enumivo::token(N(enu.token)).
 	  get_balance(_self, enumivo::symbol_type(ENU_SYMBOL).name()).amount;
   
   enu_balance = enu_balance/10000;
