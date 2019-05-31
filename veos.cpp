@@ -220,7 +220,7 @@ void veos::got_veos_send_eln(const currency::transfer &transfer) {
   eln_balance = eln_balance/10000;
 
   // get VEOS supply
-  double veos_supply = enumivo::token(N(veos.mm)).
+  double veos_supply = enumivo::token(N(token.mm)).
 	   get_supply(enumivo::symbol_type(VEOS_SYMBOL).name()).amount;
 
   veos_supply = veos_supply/10000;
